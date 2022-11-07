@@ -18,7 +18,7 @@ function App() {
 			.then((r) => r.json())
 			.then((data) => {
 				setGrade(data["user"])
-				setLoading("")
+				setLoading("so bad")
 			})
 	}
 	const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
