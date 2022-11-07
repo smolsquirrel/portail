@@ -1,23 +1,29 @@
 import { useState } from 'react';
 
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-function LoginForm() {
+interface Props {
+	handleIsLogged: Function
+}
+
+function LoginForm({ handleIsLogged }: Props) {
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
 	const [error, setError] = useState(false)
-
+	const [loading, setLoading] = useState(false)
 	const handleSubmit = (e: any) => {
 		e.preventDefault()
 		if (username === "" || password === "") {
 			setError(true)
 			return
 		}
-		login()
+		setLoading(true)
+		login().then(() => setLoading(false))
 	}
 
 	const login = async () => {
@@ -26,7 +32,7 @@ function LoginForm() {
 			method: "post",
 		})
 		if (res.status === 200) {
-			console.log("Success")
+			handleIsLogged(await res.json())
 		} else {
 			setError(true)
 		}
@@ -51,6 +57,7 @@ function LoginForm() {
 							variant="outlined"
 							fullWidth
 							autoComplete="username"
+							autoFocus
 							value={username}
 							error={error}
 							onChange={(e) => setUsername(e.target.value)}
@@ -76,6 +83,7 @@ function LoginForm() {
 							Log in
 						</Button>
 					</Grid>
+					<Grid item>{loading ? <CircularProgress /> : <></>}</Grid>
 				</Grid>
 			</form>
 		</Paper>
