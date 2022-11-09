@@ -18,8 +18,20 @@ function Dashboard({ data }: Props) {
 				backgroundSize: "cover",
 			}}
 		>
-			<h1>Average: {data["user"].toFixed(2)}</h1>
-			<h1>Class Average: {data["class"].toFixed(2)}</h1>
+			{Object.keys(data).map((x) => {
+				return (
+					<>
+						<h1>Etape: {x}</h1>
+						<h1>Average: {data[x]["user"].toFixed(2)}</h1>
+						<h1>Class Average: {data[x]["class"].toFixed(2)}</h1>
+					</>
+				)
+			})}
+			<h4>
+				im working on the site yall calm down pls. site breaks for 1 sec and neptune's
+				oceans couldnt even contain all you tryhards' sweat. stop refreshing your average
+				and go touch some grass
+			</h4>
 		</div>
 	)
 }
