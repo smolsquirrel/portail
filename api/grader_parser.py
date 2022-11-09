@@ -68,7 +68,6 @@ class Parser:
             payload = self.get_semester_payload(soup)
             payload["cboEtape"] = semester  # Set semester
             r = self.s.post(self.URL + "travaux.asp", data=payload)
-            print(r.url)
             soup = bs4(r.text, "html.parser")
             tables[semester] = self.get_tables(soup)
 
