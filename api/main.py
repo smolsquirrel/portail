@@ -22,5 +22,7 @@ async def grades(request: Request, response: Response):
     if not logged:
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {}
-    tables = parser.get_tables()
-    return parser.parse_tables(tables)
+    tables = parser.get_all_tables()
+    for table in tables:
+        tables[table] = parser.parse_tables(tables[table])
+    return tables

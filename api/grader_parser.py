@@ -37,12 +37,41 @@ class Parser:
 
         return True
 
-    def get_tables(self):
-        if not self.grades_url:
-            return []
+    def get_semester_payload(self, soup):
+        payload = {}
+        form_data = soup.find_all("input", {"type": "hidden"})
+        for data in form_data:
+            payload[data["name"]] = data["value"]
+        return payload
+
+    def get_tables(self, soup):
+        tables = soup.find_all("table", "BlueTableau")
+        return tables
+
+    def get_all_tables(self):
+        tables = {}
         r = self.s.get(self.URL + self.grades_url)
         soup = bs4(r.text, "html.parser")
-        tables = soup.find_all("table", "BlueTableau")
+        semester_nums = []
+        semesters = soup.find("select", {"id": "cboEtape"}).find_all("option")
+        # Get other semester numbers
+        for semester in semesters:
+            if semester.has_attr("selected"):
+                cur_semester = semester["value"]
+            else:
+                semester_nums.append(semester["value"])
+
+        # Landing semester tables
+        tables[cur_semester] = self.get_tables(soup)
+        # Other semester tables
+        for semester in semester_nums:
+            payload = self.get_semester_payload(soup)
+            payload["cboEtape"] = semester  # Set semester
+            r = self.s.post(self.URL + "travaux.asp", data=payload)
+            print(r.url)
+            soup = bs4(r.text, "html.parser")
+            tables[semester] = self.get_tables(soup)
+
         return tables
 
     def parse_tables(self, tables):
