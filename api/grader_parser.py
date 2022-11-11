@@ -3,6 +3,7 @@ import re
 import requests
 from container import Container
 from evaluation import Evaluation
+from main_container import MainContainer
 
 
 class Parser:
@@ -77,7 +78,7 @@ class Parser:
         course = None
         competence = None
         category = None
-        courses = Container("USER")
+        courses = MainContainer("USER")
         for table in tables:
             rows = table.find_all("tr")
             course_name = rows[0].text
