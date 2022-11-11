@@ -24,6 +24,10 @@ async def grades(request: Request, response: Response):
             response.status_code = status.HTTP_401_UNAUTHORIZED
             return {}
         tables = parser.get_all_tables()
+        default = ""
         for table in tables:
+            if not default:
+                default = table
             tables[table] = parser.parse_tables(tables[table])
+        tables["default"] = default
         return tables
