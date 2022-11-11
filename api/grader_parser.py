@@ -8,8 +8,8 @@ from evaluation import Evaluation
 class Parser:
     URL = "https://portailc.jdlm.qc.ca/pednet/"
 
-    def __init__(self):
-        self.s = requests.Session()
+    def __init__(self, client):
+        self.s = client
         self.grades_url = ""
 
     # Returns travaux page url

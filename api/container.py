@@ -1,4 +1,4 @@
-import numpy as np
+import decimal
 
 
 class Container:
@@ -26,7 +26,17 @@ class Container:
     def _calculate(self, grades):
         if len(grades) == 0:
             return 0
-        return np.average(grades, weights=self.weights)
+        total_weight = 0
+        total_grade = 0
+        for (grade, weight) in zip(grades, self.weights):
+            if grade != 0:
+                total_grade += grade * weight
+                total_weight += weight
+        if total_weight == 0:
+            return 0
+        return decimal.Decimal(total_grade / total_weight).quantize(
+            decimal.Decimal("1"), rounding=decimal.ROUND_HALF_UP
+        )
 
     def get_grade(self):
         return self._calculate(self.grades)
