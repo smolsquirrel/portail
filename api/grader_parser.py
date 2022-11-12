@@ -81,8 +81,8 @@ class Parser:
         courses = MainContainer("USER")
         for table in tables:
             rows = table.find_all("tr")
-            course_name = rows[0].text
-            course_weight = int(re.search(r"\d(?=\D)", course_name).group(0))
+            course_name = re.match(r"[a-zA-Z0-9]+", rows[0].text).group(0)
+            course_weight = int(re.search(r"\d(?=\D*$)", course_name).group(0))
             if course:
                 if competence and category:  # Add previous
                     competence.add(category)
