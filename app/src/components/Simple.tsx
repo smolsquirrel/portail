@@ -65,7 +65,7 @@ function Simple({ data }: Props) {
 						{course.contents.map((competence: any) =>
 							competence.contents.map((category: any) =>
 								category.contents.map((x: any) => (
-									<Card>
+									<Card elevation={3} sx={{ marginY: 1 }}>
 										<CardContent>
 											<Grid container>
 												<Grid item xs={9}>

@@ -2,6 +2,8 @@ import './App.css';
 
 import React, { useState } from 'react';
 
+import Box from '@mui/material/Box';
+
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 
@@ -15,13 +17,13 @@ function App() {
 		setData(_data)
 	}
 	return (
-		<div className="App">
+		<Box sx={{ margin: 5 }} className="App">
 			{isLogged ? (
 				<Dashboard data={data} semester={semester} setSemester={setSemester} />
 			) : (
 				<Login handleIsLogged={handleIsLogged} />
 			)}
-		</div>
+		</Box>
 	)
 }
 

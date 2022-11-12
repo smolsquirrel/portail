@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 
-import login_bg from '../assets/login_bg_blurry.jpg';
+import login_bg from '../assets/login_bg_blurry.png';
 import LoginForm from './LoginForm';
 
 interface Props {

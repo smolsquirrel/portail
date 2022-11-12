@@ -20,27 +20,39 @@ function Dashboard({ data, semester, setSemester }: Props) {
 	const semesterCount = Object.keys(data).length - 1
 	const curData = data[semester]
 	return (
-		<Grid container direction="column" sx={{ padding: 5 }} spacing={2}>
+		<Grid
+			container
+			direction="column"
+			sx={{
+				padding: 5,
+				backgroundColor: "rgba(255, 255, 255, 0.3)",
+				borderRadius: 5,
+			}}
+			spacing={2}
+		>
 			<Grid item container spacing={3} alignItems="center">
 				<Grid item xs={4}>
-					<Card>
+					<Card sx={{ borderRadius: 5, backgroundColor: "#7d5fff" }}>
 						<CardContent sx={{ padding: 2, height: "100%" }}>
 							<Grid container direction="column">
 								<Grid item>
 									<Box display="flex" justifyContent="flex-start">
-										<AccountCircleIcon color="disabled" sx={{ fontSize: 30 }} />
+										<AccountCircleIcon
+											color="disabled"
+											sx={{ fontSize: 30, color: "#FFFFFF" }}
+										/>
 									</Box>
 								</Grid>
 								<Grid item></Grid>
 								<Grid item>
-									<Typography variant="h3" align="left">
+									<Typography variant="h3" align="left" color="common.white">
 										<Box sx={{ fontWeight: "medium" }}>
 											{data[semester]["user"].toFixed(2)} %
 										</Box>
 									</Typography>
 								</Grid>
 								<Grid item>
-									<Typography variant="h5" align="left" color="text.secondary">
+									<Typography variant="h5" align="left" color="common.white">
 										Overall average
 									</Typography>
 								</Grid>
@@ -49,24 +61,24 @@ function Dashboard({ data, semester, setSemester }: Props) {
 					</Card>
 				</Grid>
 				<Grid item xs={4}>
-					<Card>
+					<Card sx={{ borderRadius: 5, backgroundColor: "#7d5fff" }}>
 						<CardContent sx={{ padding: 2, height: "100%" }}>
 							<Grid container direction="column">
 								<Grid item>
 									<Box display="flex" justifyContent="flex-start">
-										<SchoolIcon color="disabled" sx={{ fontSize: 30 }} />
+										<SchoolIcon sx={{ fontSize: 30, color: "#FFFFFF" }} />
 									</Box>
 								</Grid>
 								<Grid item></Grid>
 								<Grid item>
-									<Typography variant="h3" align="left">
+									<Typography variant="h3" align="left" color="common.white">
 										<Box sx={{ fontWeight: "medium" }}>
 											{data[semester]["class"].toFixed(2)} %
 										</Box>
 									</Typography>
 								</Grid>
 								<Grid item>
-									<Typography variant="h5" align="left" color="text.secondary">
+									<Typography variant="h5" align="left" color="common.white">
 										Class average
 									</Typography>
 								</Grid>
