@@ -17,7 +17,7 @@ function App() {
 		setData(_data)
 	}
 	return (
-		<Box sx={{ margin: 5 }} className="App">
+		<Box className="App">
 			{isLogged ? (
 				<Dashboard data={data} semester={semester} setSemester={setSemester} />
 			) : (

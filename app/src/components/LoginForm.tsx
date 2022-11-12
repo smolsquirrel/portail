@@ -56,7 +56,7 @@ function LoginForm({ handleIsLogged }: Props) {
 							label="Username"
 							variant="outlined"
 							fullWidth
-							autoComplete="username"
+							autoComplete="username email"
 							autoFocus
 							value={username}
 							error={error}

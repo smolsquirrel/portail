@@ -10,6 +10,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
@@ -39,22 +40,36 @@ function Simple({ data }: Props) {
 	return (
 		<>
 			{data.contents.map((course: any) => (
-				<Accordion sx={{ width: "100%" }}>
+				<Accordion sx={{ width: "100%", borderRadius: 3 }} square disableGutters>
 					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 						<Grid container>
-							<Grid item xs={9}>
-								<Typography variant="h6" align="left">
+							<Grid item xs={7} sm={8} md={9}>
+								<Typography
+									sx={{ typography: { xs: "body1", md: "h6" } }}
+									align="left"
+								>
 									{course.name}
 								</Typography>
 							</Grid>
-							<Grid item container alignItems="center" xs={3}>
-								<Grid item container spacing={1} xs={6}>
-									<AccountCircleIcon color="disabled" sx={{ fontSize: 30 }} />
-									<Typography variant="h6">{course.user}%</Typography>
+							<Grid item container alignItems="center" xs={5} sm={4} md={3}>
+								<Grid item xs={6} sx={{ display: "flex" }}>
+									<AccountCircleIcon
+										color="disabled"
+										sx={{ fontSize: { xs: 20, md: 30 } }}
+									/>
+									<Typography sx={{ typography: { xs: "body1", sm: "h6" } }}>
+										{course.user}%
+									</Typography>
 								</Grid>
-								<Grid item container spacing={1} xs={6}>
-									<SchoolIcon color="disabled" sx={{ fontSize: 30 }} />
-									<Typography variant="h6" color="text.secondary">
+								<Grid item xs={6} sx={{ display: "flex" }}>
+									<SchoolIcon
+										color="disabled"
+										sx={{ fontSize: { xs: 20, md: 30 } }}
+									/>
+									<Typography
+										sx={{ typography: { xs: "body1", sm: "h6" } }}
+										color="text.secondary"
+									>
 										{course.class}%
 									</Typography>
 								</Grid>
@@ -68,19 +83,62 @@ function Simple({ data }: Props) {
 									<Card elevation={3} sx={{ marginY: 1 }}>
 										<CardContent>
 											<Grid container>
-												<Grid item xs={9}>
-													<Typography align="left">{x.name}</Typography>
+												<Grid item xs={6} sm={7} md={8}>
+													<Typography
+														sx={{
+															typography: {
+																xs: "body2",
+																sm: "body1",
+															},
+														}}
+														align="left"
+													>
+														{x.name}
+													</Typography>
 												</Grid>
-												<Grid item container xs={3}>
+												<Grid item container xs={6} sm={5} md={4}>
 													<Grid item xs={6}>
-														<Typography>{x.user.score}</Typography>
-														<Typography>
+														<Typography
+															sx={{
+																typography: {
+																	xs: "caption",
+																	sm: "body1",
+																},
+															}}
+														>
+															{x.user.score}
+														</Typography>
+														<Typography
+															sx={{
+																typography: {
+																	xs: "caption",
+																	sm: "body1",
+																},
+															}}
+														>
 															({x.user.grade.toFixed(1)}%)
 														</Typography>
 													</Grid>
-													<Grid item>
-														<Typography>{x.class.score}</Typography>
-														<Typography>
+
+													<Grid item xs={6}>
+														<Typography
+															sx={{
+																typography: {
+																	xs: "caption",
+																	sm: "body1",
+																},
+															}}
+														>
+															{x.class.score}
+														</Typography>
+														<Typography
+															sx={{
+																typography: {
+																	xs: "caption",
+																	sm: "body1",
+																},
+															}}
+														>
 															({x.class.grade.toFixed(1)}%)
 														</Typography>
 													</Grid>
