@@ -8,6 +8,8 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
+import Simple from './Simple';
+
 interface Props {
 	data: any
 	semester: string
@@ -16,10 +18,11 @@ interface Props {
 
 function Dashboard({ data, semester, setSemester }: Props) {
 	const semesterCount = Object.keys(data).length - 1
+	const curData = data[semester]
 	return (
-		<Grid container direction="column" sx={{ padding: 3 }}>
+		<Grid container direction="column" sx={{ padding: 5 }} spacing={2}>
 			<Grid item container spacing={3} alignItems="center">
-				<Grid item xs={5}>
+				<Grid item xs={4}>
 					<Card>
 						<CardContent sx={{ padding: 2, height: "100%" }}>
 							<Grid container direction="column">
@@ -45,7 +48,7 @@ function Dashboard({ data, semester, setSemester }: Props) {
 						</CardContent>
 					</Card>
 				</Grid>
-				<Grid item xs={5}>
+				<Grid item xs={4}>
 					<Card>
 						<CardContent sx={{ padding: 2, height: "100%" }}>
 							<Grid container direction="column">
@@ -71,7 +74,7 @@ function Dashboard({ data, semester, setSemester }: Props) {
 						</CardContent>
 					</Card>
 				</Grid>
-				<Grid container item direction="column" xs={2} spacing={2}>
+				<Grid container item direction="column" xs={4} spacing={2}>
 					<Grid item>
 						<Button
 							variant={semester === "1" ? "contained" : "outlined"}
@@ -103,6 +106,12 @@ function Dashboard({ data, semester, setSemester }: Props) {
 						</Button>
 					</Grid>
 				</Grid>
+			</Grid>
+			<Grid item container spacing={2}>
+				<Grid item xs={8}>
+					<Simple data={curData} />
+				</Grid>
+				<Grid item xs={2}></Grid>
 			</Grid>
 		</Grid>
 	)
