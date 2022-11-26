@@ -18,9 +18,8 @@ interface Props {
 	loaded: boolean
 }
 
-function Dashboard({ data, semester, setSemester, loaded }: Props) {
+function SimpleDashboard({ data, semester, setSemester, loaded }: Props) {
 	const semesterCount = Object.keys(data).length - 1
-	const curData = data[semester]
 	return (
 		<Container maxWidth={false} sx={{ pt: 3 }}>
 			<Box
@@ -50,9 +49,7 @@ function Dashboard({ data, semester, setSemester, loaded }: Props) {
 												align="left"
 												color="common.white"
 											>
-												<Box sx={{ fontWeight: "medium" }}>
-													{data[semester]["user"].toFixed(2)} %
-												</Box>
+												<Box sx={{ fontWeight: "medium" }}>0.00 %</Box>
 											</Typography>
 										</Grid>
 										<Grid item>
@@ -86,9 +83,7 @@ function Dashboard({ data, semester, setSemester, loaded }: Props) {
 												align="left"
 												color="common.white"
 											>
-												<Box sx={{ fontWeight: "medium" }}>
-													{data[semester]["class"].toFixed(2)} %
-												</Box>
+												<Box sx={{ fontWeight: "medium" }}>0.00 %</Box>
 											</Typography>
 										</Grid>
 										<Grid item>
@@ -139,7 +134,7 @@ function Dashboard({ data, semester, setSemester, loaded }: Props) {
 					</Grid>
 					<Grid item container>
 						<Grid item xs={12} md={8}>
-							<Simple data={curData} loaded={loaded} />
+							<Simple data={data} loaded={loaded} />
 						</Grid>
 						<Grid item xs={12} md={4}></Grid>
 					</Grid>
@@ -149,4 +144,4 @@ function Dashboard({ data, semester, setSemester, loaded }: Props) {
 	)
 }
 
-export default Dashboard
+export default SimpleDashboard

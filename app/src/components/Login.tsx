@@ -5,9 +5,10 @@ import LoginForm from './LoginForm';
 
 interface Props {
 	handleIsLogged: Function
+	handleLoaded: Function
 }
 
-function Login({ handleIsLogged }: Props) {
+function Login({ handleIsLogged, handleLoaded }: Props) {
 	return (
 		<Box
 			display="flex"
@@ -22,7 +23,7 @@ function Login({ handleIsLogged }: Props) {
 				backgroundSize: "cover",
 			}}
 		>
-			<LoginForm handleIsLogged={handleIsLogged} />
+			<LoginForm handleIsLogged={handleIsLogged} handleLoaded={handleLoaded} />
 		</Box>
 	)
 }

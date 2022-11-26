@@ -31,12 +31,19 @@ class Parser:
         }
         r = self.s.post(self.URL + "login.asp", data=payload)
         if r.url == self.URL + "login.asp":  # Login failed
-            return False
+            return {}
 
         soup = bs4(r.text, "html.parser")
         self.grades_url = soup.find("a", string="Travaux")["href"]
 
-        return True
+        return {
+            "url": self.grades_url,
+            "cookie": {
+                "key": "ASP.NET_SessionId",
+                "value": self.s.cookies.get("ASP.NET_SessionId"),
+                "domain": "portailc.jdlm.qc.ca",
+            },
+        }
 
     def get_semester_payload(self, soup):
         payload = {}
@@ -73,6 +80,14 @@ class Parser:
             tables[semester] = self.get_tables(soup)
 
         return tables
+
+    def simple_get_tables(self):
+        r = self.s.get(self.URL + self.grades_url)
+        soup = bs4(r.text, "html.parser")
+        self.secret = self.get_semester_payload(soup)
+        x = soup.find("select", {"id": "cboEtape"}).find("option", selected=True)
+
+        return {"default": x["value"], "tables": self.get_tables(soup)}
 
     def parse_tables(self, tables):
         course = None
@@ -123,5 +138,30 @@ class Parser:
         competence.add(category)
         course.add(competence)
         courses.add(course)
+        x = courses.to_dict()
+        non_empty = []
+        for course in x["contents"]:
+            if course["class"] != 0:
+                non_empty.append(course)
+        x["contents"] = non_empty
+        return x
 
-        return courses.to_dict()
+    def simple_parse_tables(self, tables):
+        grades = {}
+        for table in tables:
+            rows = table.find_all("tr")
+            course_name = re.match(r"[a-zA-Z0-9]+", rows[0].text).group(0)
+            if course_name not in grades:
+                grades[course_name] = []
+            for row in rows[2:]:  # ignore headers
+                cells = row.find_all("td")
+                x = cells[7].text.strip()  # Check empty
+                if x:
+                    e = Evaluation(cells)
+                    grades[course_name].append(e.to_dict())
+        non_empty = {}
+        for key in grades:
+            if grades[key]:
+                non_empty[key] = grades[key]
+
+        return non_empty

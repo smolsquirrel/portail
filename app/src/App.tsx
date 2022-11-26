@@ -6,22 +6,44 @@ import Box from '@mui/material/Box';
 
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
+import SimpleDashboard from './components/SimpleDashboard';
 
 function App() {
 	const [isLogged, setLogged] = useState(false)
+	const [isLoaded, setLoaded] = useState(false)
+
 	const [data, setData] = useState()
 	const [semester, setSemester] = useState("")
 	const handleIsLogged = (_data: any) => {
 		setLogged(true)
 		setSemester(_data["default"])
+		setData(_data["data"])
+	}
+
+	const handleLoaded = (_data: any) => {
 		setData(_data)
+		setLoaded(true)
 	}
 	return (
 		<Box className="App">
 			{isLogged ? (
-				<Dashboard data={data} semester={semester} setSemester={setSemester} />
+				isLoaded ? (
+					<Dashboard
+						data={data}
+						semester={semester}
+						setSemester={setSemester}
+						loaded={isLoaded}
+					/>
+				) : (
+					<SimpleDashboard
+						data={data}
+						semester={semester}
+						setSemester={setSemester}
+						loaded={isLoaded}
+					/>
+				)
 			) : (
-				<Login handleIsLogged={handleIsLogged} />
+				<Login handleIsLogged={handleIsLogged} handleLoaded={handleLoaded} />
 			)}
 		</Box>
 	)

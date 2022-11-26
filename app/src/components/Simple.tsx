@@ -14,146 +14,15 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-interface Evaluation {
-	name: string
-	weight: number
-	user: {
-		score: string
-		grade: number
-	}
-	class: {
-		score: string
-		grade: number
-	}
-}
-interface EvalContainer {
-	name: string
-	weight: number
-	user: number
-	class: number
-	contents: Array<Evaluation | EvalContainer>
-}
-interface Props {
-	data: EvalContainer
-}
-function Simple({ data }: Props) {
-	return (
-		<>
-			{data.contents.map((course: any) => (
-				<Accordion sx={{ width: "100%", borderRadius: 3 }} square disableGutters>
-					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-						<Grid container>
-							<Grid item xs={7} sm={8} md={9}>
-								<Typography
-									sx={{ typography: { xs: "body1", md: "h6" } }}
-									align="left"
-								>
-									{course.name}
-								</Typography>
-							</Grid>
-							<Grid item container alignItems="center" xs={5} sm={4} md={3}>
-								<Grid item xs={6} sx={{ display: "flex" }}>
-									<AccountCircleIcon
-										color="disabled"
-										sx={{ fontSize: { xs: 20, md: 30 } }}
-									/>
-									<Typography sx={{ typography: { xs: "body1", sm: "h6" } }}>
-										{course.user}%
-									</Typography>
-								</Grid>
-								<Grid item xs={6} sx={{ display: "flex" }}>
-									<SchoolIcon
-										color="disabled"
-										sx={{ fontSize: { xs: 20, md: 30 } }}
-									/>
-									<Typography
-										sx={{ typography: { xs: "body1", sm: "h6" } }}
-										color="text.secondary"
-									>
-										{course.class}%
-									</Typography>
-								</Grid>
-							</Grid>
-						</Grid>
-					</AccordionSummary>
-					<AccordionDetails>
-						{course.contents.map((competence: any) =>
-							competence.contents.map((category: any) =>
-								category.contents.map((x: any) => (
-									<Card elevation={3} sx={{ marginY: 1 }}>
-										<CardContent>
-											<Grid container>
-												<Grid item xs={6} sm={7} md={8}>
-													<Typography
-														sx={{
-															typography: {
-																xs: "body2",
-																sm: "body1",
-															},
-														}}
-														align="left"
-													>
-														{x.name}
-													</Typography>
-												</Grid>
-												<Grid item container xs={6} sm={5} md={4}>
-													<Grid item xs={6}>
-														<Typography
-															sx={{
-																typography: {
-																	xs: "caption",
-																	sm: "body1",
-																},
-															}}
-														>
-															{x.user.score}
-														</Typography>
-														<Typography
-															sx={{
-																typography: {
-																	xs: "caption",
-																	sm: "body1",
-																},
-															}}
-														>
-															({x.user.grade.toFixed(1)}%)
-														</Typography>
-													</Grid>
+import DetailedGrades from './DetailedGrades';
+import SimpleGrades from './SimpleGrades';
 
-													<Grid item xs={6}>
-														<Typography
-															sx={{
-																typography: {
-																	xs: "caption",
-																	sm: "body1",
-																},
-															}}
-														>
-															{x.class.score}
-														</Typography>
-														<Typography
-															sx={{
-																typography: {
-																	xs: "caption",
-																	sm: "body1",
-																},
-															}}
-														>
-															({x.class.grade.toFixed(1)}%)
-														</Typography>
-													</Grid>
-												</Grid>
-											</Grid>
-										</CardContent>
-									</Card>
-								))
-							)
-						)}
-					</AccordionDetails>
-				</Accordion>
-			))}
-		</>
-	)
+interface Props {
+	data: any
+	loaded: boolean
+}
+function Simple({ data, loaded }: Props) {
+	return <>{loaded ? <DetailedGrades data={data} /> : <SimpleGrades data={data} />}</>
 }
 
 export default Simple

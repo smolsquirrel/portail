@@ -9,9 +9,10 @@ import Typography from '@mui/material/Typography';
 
 interface Props {
 	handleIsLogged: Function
+	handleLoaded: Function
 }
 
-function LoginForm({ handleIsLogged }: Props) {
+function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
 	const [error, setError] = useState(false)
@@ -27,12 +28,18 @@ function LoginForm({ handleIsLogged }: Props) {
 	}
 
 	const login = async () => {
-		const res = await fetch("https://hrb2ud.deta.dev/grades", {
+		const res = await fetch("https://hrb2ud.deta.dev/login", {
 			body: JSON.stringify({ username: username, password: password }),
 			method: "post",
 		})
+		const x = await res.json()
 		if (res.status === 200) {
-			handleIsLogged(await res.json())
+			handleIsLogged(x)
+			const res2 = await fetch("https://hrb2ud.deta.dev/all_grades", {
+				body: JSON.stringify({ url: x["url"], cookie: x["cookie"] }),
+				method: "post",
+			})
+			handleLoaded(await res2.json())
 		} else {
 			setError(true)
 		}
