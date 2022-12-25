@@ -3,19 +3,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from grader_parser import Parser
 import requests
+import logging
 
 app = FastAPI()
-origins = ["jdlmsweats.vercel.app"]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
 )
-
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=["jdlmsweats.vercel.app"])
 
 
 @app.post("/grades", status_code=200)
@@ -38,9 +35,12 @@ async def grades(request: Request, response: Response):
 
 @app.post("/login", status_code=200)
 async def login(request: Request, response: Response):
+    credentials = await request.json()
+    logging.info(f"LOGIN '{credentials['username']}' '{credentials['password']}'")
+    logging.info(request.headers)
     with requests.Session() as client:
         parser = Parser(client)
-        r = parser.login(**(await request.json()))
+        r = parser.login(**credentials)
         if not r:
             response.status_code = status.HTTP_401_UNAUTHORIZED
             return {}
