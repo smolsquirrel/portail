@@ -3,11 +3,13 @@ import './App.css';
 import React, { useState } from 'react';
 
 import Box from '@mui/material/Box';
+import { inject } from '@vercel/analytics';
 
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import SimpleDashboard from './components/SimpleDashboard';
 
+inject()
 function App() {
 	const [isLogged, setLogged] = useState(false)
 	const [isLoaded, setLoaded] = useState(false)
