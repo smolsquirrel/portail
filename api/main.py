@@ -4,7 +4,7 @@ from grader_parser import Parser
 import requests
 
 app = FastAPI()
-origins = ["*"]
+origins = ["jdlmsweats.vercel.app"]
 
 app.add_middleware(
     CORSMiddleware,
