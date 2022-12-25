@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from grader_parser import Parser
 import requests
 
@@ -13,6 +14,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=["jdlmsweats.vercel.app"])
 
 
 @app.post("/grades", status_code=200)
