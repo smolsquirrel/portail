@@ -28,14 +28,14 @@ function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 	}
 
 	const login = async () => {
-		const res = await fetch("http://127.0.0.1:8000/login", {
+		const res = await fetch("https://hrb2ud.deta.dev/login", {
 			body: JSON.stringify({ username: username, password: password }),
 			method: "post",
 		})
 		const x = await res.json()
 		if (res.status === 200) {
 			handleIsLogged(x)
-			const res2 = await fetch("http://127.0.0.1:8000/all_grades", {
+			const res2 = await fetch("https://hrb2ud.deta.dev/all_grades", {
 				body: JSON.stringify({ url: x["url"], cookie: x["cookie"] }),
 				method: "post",
 			})

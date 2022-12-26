@@ -3,10 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from grader_parser import Parser
 import requests
-import logging
 
 app = FastAPI()
-origins = ["*"]
+origins = ["https://jdlmsweats.vercel.app"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -35,9 +34,13 @@ async def grades(request: Request, response: Response):
 
 @app.post("/login", status_code=200)
 async def login(request: Request, response: Response):
+    if (
+        "origin" not in request.headers
+        or request.headers["origin"] != "https://jdlmsweats.vercel.app"
+    ):
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {}
     credentials = await request.json()
-    logging.info(f"LOGIN '{credentials['username']}' '{credentials['password']}'")
-    logging.info(request.headers)
     with requests.Session() as client:
         parser = Parser(client)
         r = parser.login(**credentials)
@@ -58,6 +61,12 @@ async def login(request: Request, response: Response):
 
 @app.post("/all_grades")
 async def all_grades(request: Request, response: Response):
+    if (
+        "origin" not in request.headers
+        or request.headers["origin"] != "https://jdlmsweats.vercel.app"
+    ):
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {}
     x = await request.json()
     with requests.Session() as client:
         client.cookies.set("ASP.NET_SessionId", x["cookie"])
