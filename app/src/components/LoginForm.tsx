@@ -28,7 +28,7 @@ function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 	}
 
 	const login = async () => {
-		const res = await fetch("https://hrb2ud.deta.dev/login", {
+		const res = await fetch("http://127.0.0.1:8000/login", {
 			body: JSON.stringify({ username: username, password: password }),
 			method: "post",
 		})
