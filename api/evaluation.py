@@ -3,11 +3,11 @@ import re
 
 class Evaluation:
     def __init__(self, cells):
+        self.absent = False
         self.name = cells[2].text.strip()
         self.weight = int(cells[3].text)
         self.score = self.get_score(cells[7].text)
         self.average = self.get_score(cells[8].text)
-        self.absent = False
 
     def get_score(self, score):
         if score == "AS":
