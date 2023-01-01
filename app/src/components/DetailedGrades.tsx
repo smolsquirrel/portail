@@ -122,7 +122,11 @@ function DetailedGrades({ data }: Props) {
 																},
 															}}
 														>
-															({x.user.grade.toFixed(1)}%)
+															(
+															{x.user.grade === "AS"
+																? "AS"
+																: x.user.grade.toFixed(1)}
+															)
 														</Typography>
 													</Grid>
 
