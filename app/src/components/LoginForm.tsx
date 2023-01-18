@@ -12,7 +12,7 @@ interface Props {
 	handleLoaded: Function
 }
 
-const api_url = process.env.REACT_APP_API_URL
+const api_url = process.env.REACT_APP_URL
 
 function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 	const [username, setUsername] = useState("")
