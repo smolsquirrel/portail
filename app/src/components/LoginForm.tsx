@@ -30,16 +30,16 @@ function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 	}
 
 	const login = async () => {
-		const res = await fetch(`${api_url}/login`, {
+		const res = await fetch("http://155.248.234.122:8000/login", {
+			method: "POST",
 			body: JSON.stringify({ username: username, password: password }),
-			method: "post",
 		})
 		const x = await res.json()
 		if (res.status === 200) {
 			handleIsLogged(x)
-			const res2 = await fetch(`${api_url}/all_grades`, {
+			const res2 = await fetch("http://155.248.234.122:8000/all_grades", {
+				method: "POST",
 				body: JSON.stringify({ url: x["url"], cookie: x["cookie"] }),
-				method: "post",
 			})
 			handleLoaded(await res2.json())
 		} else {
