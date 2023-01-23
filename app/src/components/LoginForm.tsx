@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { useState } from "react"
 
-import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import Button from "@mui/material/Button"
+import CircularProgress from "@mui/material/CircularProgress"
+import Grid from "@mui/material/Grid"
+import Paper from "@mui/material/Paper"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
 
 interface Props {
 	handleIsLogged: Function
 	handleLoaded: Function
 }
+
+const api_url = process.env.REACT_APP_URL
 
 function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 	const [username, setUsername] = useState("")
@@ -28,16 +30,16 @@ function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 	}
 
 	const login = async () => {
-		const res = await fetch("https://hrb2ud.deta.dev/login", {
+		const res = await fetch("http://155.248.234.122:8000/login", {
+			method: "POST",
 			body: JSON.stringify({ username: username, password: password }),
-			method: "post",
 		})
 		const x = await res.json()
 		if (res.status === 200) {
 			handleIsLogged(x)
-			const res2 = await fetch("https://hrb2ud.deta.dev/all_grades", {
+			const res2 = await fetch("http://155.248.234.122:8000/all_grades", {
+				method: "POST",
 				body: JSON.stringify({ url: x["url"], cookie: x["cookie"] }),
-				method: "post",
 			})
 			handleLoaded(await res2.json())
 		} else {
