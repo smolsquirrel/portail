@@ -2,6 +2,12 @@ from fastapi import FastAPI, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from grader_parser import Parser
 import requests
+import json
+import psycopg2
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 origins = [
@@ -16,6 +22,16 @@ app.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
 )
+
+conn = psycopg2.connect(
+    host=os.getenv("DATABASE_HOST"),
+    database="postgres",
+    user="postgres",
+    password=os.getenv("DATABASE_PASSWORD"),
+)
+conn.autocommit = True
+
+cur = conn.cursor()
 
 
 @app.post("/grades", status_code=200)
@@ -38,21 +54,33 @@ async def grades(request: Request, response: Response):
 
 @app.post("/login", status_code=200)
 async def login(request: Request, response: Response):
+    headers = json.dumps(dict(request.headers))
+    credentials = await request.json()
     if "origin" not in request.headers or request.headers["origin"] not in origins:
         response.status_code = status.HTTP_401_UNAUTHORIZED
+        cur.execute(
+            "INSERT INTO logs.login_logs (username, success, details) VALUES (%s, %s, %s);",
+            (credentials["username"], False, headers),
+        )
         return {}
 
-    credentials = await request.json()
     with requests.Session() as client:
         parser = Parser(client)
         r = parser.login(**credentials)
         if not r:
             response.status_code = status.HTTP_401_UNAUTHORIZED
+            cur.execute(
+                "INSERT INTO logs.login_logs (username, success, details) VALUES (%s, %s, %s);",
+                (credentials["username"], False, headers),
+            )
             return {}
 
         x = parser.simple_get_tables()
         tables = x["tables"]
-
+        cur.execute(
+            "INSERT INTO logs.login_logs (username, success, details) VALUES (%s, %s, %s);",
+            (credentials["username"], True, headers),
+        )
         return {
             "url": r["url"],
             "cookie": r["cookie"]["value"],
