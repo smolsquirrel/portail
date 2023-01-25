@@ -108,3 +108,8 @@ async def all_grades(request: Request, response: Response):
             tables[table] = parser.parse_tables(tables[table])
         tables["default"] = default
         return tables
+
+
+@app.get("/")
+async def root():
+    return {}
