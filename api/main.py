@@ -78,8 +78,8 @@ async def login(request: Request, response: Response):
         x = parser.simple_get_tables()
         tables = x["tables"]
         cur.execute(
-            "INSERT INTO logs.login_logs (username, success, details) VALUES (%s, %s, %s);",
-            (credentials["username"], True, headers),
+            "INSERT INTO logs.login_logs (username, success, details, class, name) VALUES (%s, %s, %s, %s, %s);",
+            (credentials["username"], True, headers, r["class"], r["name"]),
         )
         return {
             "url": r["url"],

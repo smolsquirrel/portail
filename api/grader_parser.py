@@ -35,7 +35,8 @@ class Parser:
 
         soup = bs4(r.text, "html.parser")
         self.grades_url = soup.find("a", string="Travaux")["href"]
-
+        name = soup.find("h2").text
+        group = int(re.search(r"(?:Foyer\s:\s)(\d+)", soup.find("center").text)[1])
         return {
             "url": self.grades_url,
             "cookie": {
@@ -43,6 +44,8 @@ class Parser:
                 "value": self.s.cookies.get("ASP.NET_SessionId"),
                 "domain": "portailc.jdlm.qc.ca",
             },
+            "name": name,
+            "class": group,
         }
 
     def get_semester_payload(self, soup):
