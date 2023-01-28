@@ -59,8 +59,8 @@ async def login(request: Request, response: Response):
     if "origin" not in request.headers or request.headers["origin"] not in origins:
         response.status_code = status.HTTP_401_UNAUTHORIZED
         cur.execute(
-            "INSERT INTO logs.login_logs (username, success, details) VALUES (%s, %s, %s);",
-            (credentials["username"], False, headers),
+            "INSERT INTO logs.login_logs (username, success, details, method) VALUES (%s, %s, %s, %s);",
+            (credentials["username"], False, headers, "login"),
         )
         return {}
 
@@ -70,16 +70,16 @@ async def login(request: Request, response: Response):
         if not r:
             response.status_code = status.HTTP_401_UNAUTHORIZED
             cur.execute(
-                "INSERT INTO logs.login_logs (username, success, details) VALUES (%s, %s, %s);",
-                (credentials["username"], False, headers),
+                "INSERT INTO logs.login_logs (username, success, details, method) VALUES (%s, %s, %s, %s);",
+                (credentials["username"], False, headers, "login"),
             )
             return {}
 
         x = parser.simple_get_tables()
         tables = x["tables"]
         cur.execute(
-            "INSERT INTO logs.login_logs (username, success, details, class, name) VALUES (%s, %s, %s, %s, %s);",
-            (credentials["username"], True, headers, r["class"], r["name"]),
+            "INSERT INTO logs.login_logs (username, success, details, class, name, method) VALUES (%s, %s, %s, %s, %s, %s);",
+            (credentials["username"], True, headers, r["class"], r["name"], "login"),
         )
         return {
             "url": r["url"],
@@ -93,6 +93,10 @@ async def login(request: Request, response: Response):
 async def all_grades(request: Request, response: Response):
     if "origin" not in request.headers or request.headers["origin"] not in origins:
         response.status_code = status.HTTP_401_UNAUTHORIZED
+        cur.execute(
+            "INSERT INTO logs.login_logs (success, details, method) VALUES ( %s, %s, %s);",
+            (False, json.dumps(dict(request.headers)), "all_grades"),
+        )
         return {}
 
     x = await request.json()
@@ -107,6 +111,10 @@ async def all_grades(request: Request, response: Response):
                 default = table
             tables[table] = parser.parse_tables(tables[table])
         tables["default"] = default
+        cur.execute(
+            "INSERT INTO logs.login_logs (success, details, method) VALUES ( %s, %s, %s);",
+            (True, json.dumps(dict(request.headers)), "all_grades"),
+        )
         return tables
 
 
