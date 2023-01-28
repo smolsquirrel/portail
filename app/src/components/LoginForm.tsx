@@ -88,7 +88,13 @@ function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 					</Grid>
 
 					<Grid container item>
-						<Button type="submit" variant="contained" fullWidth onClick={handleSubmit}>
+						<Button
+							type="submit"
+							variant="contained"
+							disabled={loading}
+							fullWidth
+							onClick={handleSubmit}
+						>
 							Log in
 						</Button>
 					</Grid>
