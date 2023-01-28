@@ -1,7 +1,10 @@
 services:
-    app:
+    jdlm-api:
         build: .
         container_name: jdlm-api
+        image: jdlm-api
         command: uvicorn main:app --host 0.0.0.0 --port 8080 --reload
         ports:
             - 8080:8080
+        volumes:
+            - .:/api
