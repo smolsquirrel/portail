@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import { inject } from '@vercel/analytics';
 
 import Dashboard from './components/Dashboard';
-import Login from './components/Login';
 import LoginForm from './components/LoginForm';
 import Navbar from './components/Navbar';
 import SimpleDashboard from './components/SimpleDashboard';
@@ -48,7 +47,9 @@ function App() {
 					/>
 				)
 			) : (
-				<Login handleIsLogged={handleIsLogged} handleLoaded={handleLoaded} />
+				<Box display="flex" justifyContent="center" alignItems="center" height="90vh">
+					<LoginForm handleIsLogged={handleIsLogged} handleLoaded={handleLoaded} />
+				</Box>
 			)}
 		</Box>
 	)
