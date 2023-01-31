@@ -100,36 +100,20 @@ function SimpleDashboard({ data, semester, setSemester, loaded }: Props) {
 							</Card>
 						</Grid>
 						<Grid item container direction="column" xs={12} sm={4} spacing={1}>
-							<Grid item>
-								<Button
-									variant={semester === "1" ? "contained" : "outlined"}
-									fullWidth
-									onClick={() => setSemester("1")}
-									disabled={semesterCount < 1}
-								>
-									Étape 1
-								</Button>
-							</Grid>
-							<Grid item>
-								<Button
-									variant={semester === "2" ? "contained" : "outlined"}
-									fullWidth
-									onClick={() => setSemester("2")}
-									disabled={semesterCount < 2}
-								>
-									Étape 2
-								</Button>
-							</Grid>
-							<Grid item>
-								<Button
-									variant={semester === "3" ? "contained" : "outlined"}
-									fullWidth
-									onClick={() => setSemester("3")}
-									disabled={semesterCount < 3}
-								>
-									Étape 3
-								</Button>
-							</Grid>
+							{[1, 2, 3].map((x) => (
+								<Grid item>
+									<Button
+										variant={
+											semester === x.toString() ? "contained" : "outlined"
+										}
+										fullWidth
+										onClick={() => setSemester(x.toString())}
+										disabled={semesterCount < x}
+									>
+										Étape {x}
+									</Button>
+								</Grid>
+							))}
 						</Grid>
 					</Grid>
 					<Grid item container>
