@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -49,7 +50,9 @@ function SimpleDashboard({ data, semester, setSemester, loaded }: Props) {
 												align="left"
 												color="common.white"
 											>
-												<Box sx={{ fontWeight: "medium" }}>0.00 %</Box>
+												<Box sx={{ fontWeight: "medium" }}>
+													<CircularProgress sx={{ color: "white" }} />
+												</Box>
 											</Typography>
 										</Grid>
 										<Grid item>
@@ -83,7 +86,9 @@ function SimpleDashboard({ data, semester, setSemester, loaded }: Props) {
 												align="left"
 												color="common.white"
 											>
-												<Box sx={{ fontWeight: "medium" }}>0.00 %</Box>
+												<Box sx={{ fontWeight: "medium" }}>
+													<CircularProgress sx={{ color: "white" }} />
+												</Box>
 											</Typography>
 										</Grid>
 										<Grid item>
