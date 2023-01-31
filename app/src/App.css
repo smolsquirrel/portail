@@ -4,4 +4,6 @@
 
 body {
 	background-image: url("./assets/login_bg_blurry.webp");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
