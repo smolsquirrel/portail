@@ -33,7 +33,7 @@ function SimpleDashboard({ data, semester, setSemester, loaded }: Props) {
 				<Grid container direction="column" spacing={2}>
 					<Grid item container alignItems="center" spacing={2}>
 						<Grid item xs={12} sm={4}>
-							<Card sx={{ borderRadius: 5, backgroundColor: "#ff9f43" }}>
+							<Card sx={{ borderRadius: 5, backgroundColor: "#fa8231" }}>
 								<CardContent sx={{ padding: 2, height: "100%" }}>
 									<Grid container direction="column">
 										<Grid item>
@@ -69,7 +69,7 @@ function SimpleDashboard({ data, semester, setSemester, loaded }: Props) {
 							</Card>
 						</Grid>
 						<Grid item xs={12} sm={4}>
-							<Card sx={{ borderRadius: 5, backgroundColor: "#9c88ff" }}>
+							<Card sx={{ borderRadius: 5, backgroundColor: "#2d98da" }}>
 								<CardContent sx={{ padding: 2, height: "100%" }}>
 									<Grid container direction="column">
 										<Grid item>
