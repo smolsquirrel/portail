@@ -10,19 +10,7 @@ interface Props {
 
 function Login({ handleIsLogged, handleLoaded }: Props) {
 	return (
-		<Box
-			display="flex"
-			justifyContent="center"
-			alignItems="center"
-			minHeight="100vh"
-			sx={{
-				backgroundImage: `url(${login_bg})`,
-				height: "100%",
-				backgroundPosition: "center",
-				backgroundRepeat: "no-repeat",
-				backgroundSize: "cover",
-			}}
-		>
+		<Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
 			<LoginForm handleIsLogged={handleIsLogged} handleLoaded={handleLoaded} />
 		</Box>
 	)
