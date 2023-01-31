@@ -7,6 +7,8 @@ import { inject } from '@vercel/analytics';
 
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
+import LoginForm from './components/LoginForm';
+import Navbar from './components/Navbar';
 import SimpleDashboard from './components/SimpleDashboard';
 
 inject()
@@ -28,6 +30,7 @@ function App() {
 	}
 	return (
 		<Box className="App">
+			<Navbar />
 			{isLogged ? (
 				isLoaded ? (
 					<Dashboard
