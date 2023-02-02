@@ -19,8 +19,7 @@ function Navbar() {
 					Contact (questions, suggestions, bugs)
 				</Button>
 				<Typography>
-					YO IM JUST TRYNNA BE NICE AND IMPROVE STUDENTS' QUALITY OF LIFE BY SHOWING THEM
-					THEIR AVERAGE BUT YOU GUYS MAKE THEIR QOL WORSE BY ADDING A CAPTCHA LMAO
+					YO MAYBE IF YOU CAN'T TYPE ANYTHING IN IT'S BECAUSE IT'S DISABLED 
 				</Typography>
 			</Toolbar>
 		</AppBar>
