@@ -69,6 +69,7 @@ function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 							autoFocus
 							value={username}
 							error={error}
+							disabled={true}
 							onChange={(e) => setUsername(e.target.value)}
 						/>
 					</Grid>
@@ -77,6 +78,7 @@ function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 							id="password"
 							label="Password"
 							variant="outlined"
+							disabled={true}
 							type="password"
 							fullWidth
 							autoComplete="current-password"
@@ -91,7 +93,8 @@ function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 						<Button
 							type="submit"
 							variant="contained"
-							disabled={loading}
+							// disabled={loading}
+							disabled={true}
 							fullWidth
 							onClick={handleSubmit}
 						>
