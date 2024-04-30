@@ -11,9 +11,6 @@ import LoginForm from "./components/LoginForm"
 import Navbar from "./components/Navbar"
 import SimpleDashboard from "./components/SimpleDashboard"
 
-function onChange(value: any) {
-	console.log("Captcha value:", value)
-}
 inject()
 function App() {
 	const [isLogged, setLogged] = useState(false)
