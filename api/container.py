@@ -21,14 +21,14 @@ class Container:
             self.grades.append(x.get_grade())
             self.weights.append(x.weight)
         self.average_weights.append(x.weight)
-        self.averages.append(x.get_average())
+        # self.averages.append(x.get_average())
 
     def _calculate(self, grades):
         if len(grades) == 0:
             return 0
         total_weight = 0
         total_grade = 0
-        for (grade, weight) in zip(grades, self.weights):
+        for grade, weight in zip(grades, self.weights):
             if grade != 0:
                 total_grade += grade * weight
                 total_weight += weight
@@ -49,7 +49,7 @@ class Container:
             "name": self.name,
             "weight": self.weight,
             "user": self.get_grade(),
-            "class": self.get_average(),
+            "class": self.get_grade(),
             "contents": list(map(lambda x: x.to_dict(), self.contents)),
         }
         return data

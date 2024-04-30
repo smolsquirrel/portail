@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState } from "react"
 
-import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import Button from "@mui/material/Button"
+import CircularProgress from "@mui/material/CircularProgress"
+import Grid from "@mui/material/Grid"
+import Paper from "@mui/material/Paper"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
 
 interface Props {
 	handleIsLogged: Function
@@ -69,7 +69,6 @@ function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 							autoFocus
 							value={username}
 							error={error}
-							disabled={true}
 							onChange={(e) => setUsername(e.target.value)}
 						/>
 					</Grid>
@@ -78,7 +77,6 @@ function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 							id="password"
 							label="Password"
 							variant="outlined"
-							disabled={true}
 							type="password"
 							fullWidth
 							autoComplete="current-password"
@@ -90,14 +88,7 @@ function LoginForm({ handleIsLogged, handleLoaded }: Props) {
 					</Grid>
 
 					<Grid container item>
-						<Button
-							type="submit"
-							variant="contained"
-							// disabled={loading}
-							disabled={true}
-							fullWidth
-							onClick={handleSubmit}
-						>
+						<Button type="submit" variant="contained" fullWidth onClick={handleSubmit}>
 							Log in
 						</Button>
 					</Grid>

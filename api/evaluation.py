@@ -7,13 +7,13 @@ class Evaluation:
         self.name = cells[2].text.strip()
         self.weight = int(cells[3].text)
         self.score = self.get_score(cells[7].text)
-        self.average = self.get_score(cells[8].text)
+        self.average = self.get_score(cells[7].text)
 
     def get_score(self, score):
-        if score == "AS":
-            self.absent = True
-            return ("AS", "AS")
         r = re.match(r"(\d+(,\d+)?)(?:\s\/\s)(\d+)", score)
+        if not r:
+            self.absent = True
+            return (score, score)
         return (float(re.sub(",", ".", r.group(1))), float(r.group(3)))
 
     def get_grade(self):
@@ -34,7 +34,7 @@ class Evaluation:
             },
             "class": {
                 "score": f"{self.average[0]}/{self.average[1]}",
-                "grade": self.get_average(),
+                # "grade": self.get_average(),
             },
         }
         return data

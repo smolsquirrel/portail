@@ -1,15 +1,15 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SchoolIcon from '@mui/icons-material/School';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle"
+import SchoolIcon from "@mui/icons-material/School"
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import Card from "@mui/material/Card"
+import CardContent from "@mui/material/CardContent"
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
 
-import Simple from './Simple';
+import Simple from "./Simple"
 
 interface Props {
 	data: any
@@ -68,7 +68,8 @@ function Dashboard({ data, semester, setSemester, loaded }: Props) {
 								</CardContent>
 							</Card>
 						</Grid>
-						<Grid item xs={12} sm={4}>
+						<Grid item xs={12} sm={4}></Grid>
+						{/* <Grid item xs={12} sm={4}>
 							<Card sx={{ borderRadius: 5, backgroundColor: "#2d98da" }}>
 								<CardContent sx={{ padding: 2, height: "100%" }}>
 									<Grid container direction="column">
@@ -103,7 +104,7 @@ function Dashboard({ data, semester, setSemester, loaded }: Props) {
 									</Grid>
 								</CardContent>
 							</Card>
-						</Grid>
+						</Grid> */}
 						<Grid item container direction="column" xs={12} sm={4} spacing={1}>
 							<Grid item>
 								<Button

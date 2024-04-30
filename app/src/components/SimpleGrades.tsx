@@ -1,24 +1,25 @@
-import React from 'react';
+import React from "react"
 
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import SchoolIcon from '@mui/icons-material/School';
-import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import SchoolIcon from "@mui/icons-material/School"
+import Accordion from "@mui/material/Accordion"
+import AccordionActions from "@mui/material/AccordionActions"
+import AccordionDetails from "@mui/material/AccordionDetails"
+import AccordionSummary from "@mui/material/AccordionSummary"
+import Button from "@mui/material/Button"
+import Card from "@mui/material/Card"
+import CardContent from "@mui/material/CardContent"
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
 interface Props {
 	data: any
 }
 
 function SimpleGrades({ data }: Props) {
+	console.log(data)
 	return (
 		<>
 			{Object.keys(data).map((key) => (
@@ -73,11 +74,15 @@ function SimpleGrades({ data }: Props) {
 														},
 													}}
 												>
-													({x.user.grade.toFixed(1)}%)
+													(
+													{x.user.grade === "AS"
+														? "AS"
+														: x.user.grade.toFixed(1)}
+													%)
 												</Typography>
 											</Grid>
 
-											<Grid item xs={6}>
+											{/* <Grid item xs={6}>
 												<Typography
 													sx={{
 														typography: {
@@ -98,7 +103,7 @@ function SimpleGrades({ data }: Props) {
 												>
 													({x.class.grade.toFixed(1)}%)
 												</Typography>
-											</Grid>
+											</Grid> */}
 										</Grid>
 									</Grid>
 								</CardContent>

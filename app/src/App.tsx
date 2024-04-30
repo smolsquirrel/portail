@@ -1,15 +1,19 @@
-import './App.css';
+import "./App.css"
 
-import React, { useState } from 'react';
+import React, { useState } from "react"
 
-import Box from '@mui/material/Box';
-import { inject } from '@vercel/analytics';
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import { inject } from "@vercel/analytics"
 
-import Dashboard from './components/Dashboard';
-import LoginForm from './components/LoginForm';
-import Navbar from './components/Navbar';
-import SimpleDashboard from './components/SimpleDashboard';
+import Dashboard from "./components/Dashboard"
+import LoginForm from "./components/LoginForm"
+import Navbar from "./components/Navbar"
+import SimpleDashboard from "./components/SimpleDashboard"
 
+function onChange(value: any) {
+	console.log("Captcha value:", value)
+}
 inject()
 function App() {
 	const [isLogged, setLogged] = useState(false)
@@ -29,7 +33,7 @@ function App() {
 	}
 	return (
 		<Box className="App">
-			<Navbar />
+			{/* <Navbar /> */}
 			{isLogged ? (
 				isLoaded ? (
 					<Dashboard
