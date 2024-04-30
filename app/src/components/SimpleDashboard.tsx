@@ -69,42 +69,6 @@ function SimpleDashboard({ data, semester, setSemester, loaded }: Props) {
 							</Card>
 						</Grid>
 						<Grid item xs={12} sm={4}></Grid>
-						{/* <Grid item xs={12} sm={4}>
-							<Card sx={{ borderRadius: 5, backgroundColor: "#2d98da" }}>
-								<CardContent sx={{ padding: 2, height: "100%" }}>
-									<Grid container direction="column">
-										<Grid item>
-											<Box display="flex" justifyContent="flex-start">
-												<SchoolIcon
-													sx={{ fontSize: 30, color: "#FFFFFF" }}
-												/>
-											</Box>
-										</Grid>
-										<Grid item></Grid>
-										<Grid item>
-											<Typography
-												sx={{ typography: { xs: "h4", md: "h3" } }}
-												align="left"
-												color="common.white"
-											>
-												<Box sx={{ fontWeight: "medium" }}>
-													<CircularProgress sx={{ color: "white" }} />
-												</Box>
-											</Typography>
-										</Grid>
-										<Grid item>
-											<Typography
-												sx={{ typography: { xs: "h6", sm: "h5" } }}
-												align="left"
-												color="common.white"
-											>
-												Class average
-											</Typography>
-										</Grid>
-									</Grid>
-								</CardContent>
-							</Card>
-						</Grid> */}
 						<Grid item container direction="column" xs={12} sm={4} spacing={1}>
 							{[1, 2, 3].map((x) => (
 								<Grid item>

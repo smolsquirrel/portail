@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react"
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import AppBar from "@mui/material/AppBar"
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import Toolbar from "@mui/material/Toolbar"
+import Typography from "@mui/material/Typography"
 
 function Navbar() {
 	return (
@@ -18,9 +18,6 @@ function Navbar() {
 				>
 					Contact (questions, suggestions, bugs)
 				</Button>
-				<Typography>
-					YO MAYBE IF YOU CAN'T TYPE ANYTHING IN IT'S BECAUSE IT'S DISABLED 
-				</Typography>
 			</Toolbar>
 		</AppBar>
 	)

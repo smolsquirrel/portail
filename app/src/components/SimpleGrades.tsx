@@ -81,29 +81,6 @@ function SimpleGrades({ data }: Props) {
 													%)
 												</Typography>
 											</Grid>
-
-											{/* <Grid item xs={6}>
-												<Typography
-													sx={{
-														typography: {
-															xs: "caption",
-															sm: "body1",
-														},
-													}}
-												>
-													{x.class.score}
-												</Typography>
-												<Typography
-													sx={{
-														typography: {
-															xs: "caption",
-															sm: "body1",
-														},
-													}}
-												>
-													({x.class.grade.toFixed(1)}%)
-												</Typography>
-											</Grid> */}
 										</Grid>
 									</Grid>
 								</CardContent>
